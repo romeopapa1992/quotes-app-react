@@ -14,8 +14,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/register", credentials);
-      localStorage.setItem("token", response.data.token);
+      await axios.post("http://localhost:3000/register", credentials);
       navigate("/quotes");
     } catch (error) {
       console.error("Register failed", error);
@@ -23,7 +22,8 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="container">
+      <h1 className="title">Register</h1>
       <form onSubmit={handleSubmit}>
         <input name="email" type="email" placeholder="Email" onChange={handleChange} />
         <input name="password" type="password" placeholder="Password" onChange={handleChange} />
