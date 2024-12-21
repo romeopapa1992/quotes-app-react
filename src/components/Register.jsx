@@ -15,7 +15,7 @@ function Register() {
     e.preventDefault();
     try {
       await axios.post("http://localhost:3000/register", credentials);
-      navigate("/quotes");
+      navigate("/login");
     } catch (error) {
       console.error("Register failed", error);
     }

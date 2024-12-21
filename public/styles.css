@@ -79,23 +79,6 @@ button:active {
   gap: 10px; 
 }
 
-.quotes-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  padding: 20px;
-}
-
-.quote-card {
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 15px;
-  width: 300px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .quote-card textarea,
 .quote-card input {
   width: 95%; 
@@ -123,5 +106,77 @@ button:active {
   text-align: center;
 }
 
+.quote-card {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  width: 300px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  height: auto; 
+}
 
+.quote-card-editing {
+  height: auto; 
+  padding-bottom: 20px;
+  z-index: 10;
+  position: relative; 
+}
 
+.quote-edit-textarea,
+.quote-edit-input {
+  width: calc(100% - 20px); 
+  margin: 10px auto;
+  font-size: 1rem;
+}
+
+.quotes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  justify-content: center; 
+  align-items: flex-start; 
+  padding: 20px;
+  margin: 0 auto; 
+  max-width: 100%; 
+  box-sizing: border-box; 
+}
+
+footer {
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 20px;
+}
+
+.logout-button {
+  background-color: #080b0f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #373e45;
+  transform: scale(1.05);
+}

@@ -17,10 +17,9 @@ function QuotesPanel() {
         console.error("Failed to fetch quotes", error);
       }
     };
-  
-    fetchQuotes(); 
+
+    fetchQuotes();
   }, []);
-  
 
   const refreshAccessToken = async () => {
     try {
@@ -38,12 +37,12 @@ function QuotesPanel() {
       window.location.href = "/login";
     }
   };
-  
+
   const addQuote = async (newQuote) => {
     try {
       let token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
-  
+
       const response = await axios.post("http://localhost:3000/quotes", newQuote, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -63,8 +62,8 @@ function QuotesPanel() {
         alert(error.response?.data?.message || "Failed to add quote");
       }
     }
-  };  
-  
+  };
+
   const deleteQuote = async (id) => {
     try {
       await axios.delete(`http://localhost:3000/quotes/${id}`, {
@@ -78,7 +77,7 @@ function QuotesPanel() {
 
   const editQuote = async (id, newContent, newSource) => {
     try {
-      const response = await axios.put(
+      await axios.put(
         `http://localhost:3000/quotes/${id}`,
         { content: newContent, source: newSource },
         {
