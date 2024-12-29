@@ -7,7 +7,6 @@ import HomePage from "./HomePage";
 import Footer from "./Footer";
 import Header from "./Header";
 
-
 function App() {
 
   const location = useLocation();

@@ -1,12 +1,35 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; 
 import Quotes from "./Quotes";
 import Unit from "./Unit";
 
 function QuotesPanel() {
   const [quotes, setQuotes] = useState([]);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
+    const checkAuthentication = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("/"); 
+        return;
+      }
+
+      try {
+        await axios.get("http://localhost:3000/auth/verify", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      } catch (error) {
+        console.error("Authentication failed:", error.response || error.message);
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
+        navigate("/"); 
+      }
+    };
+
+    checkAuthentication();
+
     const fetchQuotes = async () => {
       try {
         const response = await axios.get("http://localhost:3000/quotes", {
@@ -19,7 +42,7 @@ function QuotesPanel() {
     };
 
     fetchQuotes();
-  }, []);
+  }, [navigate]);
 
   const refreshAccessToken = async () => {
     try {
@@ -34,7 +57,7 @@ function QuotesPanel() {
       alert("Session expired. Please log in again.");
       localStorage.removeItem("token");
       localStorage.removeItem("refreshToken");
-      window.location.href = "/login";
+      navigate("/"); 
     }
   };
 
@@ -114,3 +137,4 @@ function QuotesPanel() {
 }
 
 export default QuotesPanel;
+

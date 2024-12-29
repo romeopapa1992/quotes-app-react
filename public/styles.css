@@ -180,3 +180,17 @@ header {
   background-color: #373e45;
   transform: scale(1.05);
 }
+
+.error {
+  border: 2px solid red;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.input-group {
+  width: 100%;
+}
+
