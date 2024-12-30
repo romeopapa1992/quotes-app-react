@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { validateQuote } from "../validation";
+import { validateQuote } from "../services/validation";
 
 function Quotes({ onAdd }) {
   const [content, setContent] = useState("");

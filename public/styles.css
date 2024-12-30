@@ -182,11 +182,11 @@ header {
 }
 
 .error {
-  border: 2px solid red;
+  border: 2px solid rgb(195, 77, 77);
 }
 
 .error-text {
-  color: red;
+  color: rgb(195, 77, 77);
   font-size: 0.9rem;
 }
 

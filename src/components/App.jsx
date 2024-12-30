@@ -6,14 +6,14 @@ import QuotesPanel from "./QuotesPanel";
 import HomePage from "./HomePage";
 import Footer from "./Footer";
 import Header from "./Header";
+import { logout } from "../services/authService";
 
 function App() {
 
   const location = useLocation();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
+    logout();
     window.location.href = "/";
   };
 

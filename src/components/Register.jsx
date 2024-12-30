@@ -1,42 +1,35 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { validateRegister } from "../validation";
+import { validateRegister } from "../services/validation";
+import { register } from "../services/authService";
 
-function Register() {
-  const [credentials, setCredentials] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({});
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" })); 
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = validateRegister(credentials);
-
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
-    try {
-      await axios.post("http://localhost:3000/auth/register", credentials);
-      navigate("/login");
-    } catch (error) {
-      const status = error.response?.status;
-      const message = error.response?.data?.message;
-
-      if (status === 400 || status === 409) {
-        setErrors({ email: message });
-      } else {
-        alert("Something went wrong. Please try again.");
+  function Register() {
+    const [credentials, setCredentials] = useState({ email: "", password: "" });
+    const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setCredentials((prev) => ({ ...prev, [name]: value }));
+      setErrors((prev) => ({ ...prev, [name]: "" })); 
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const validationErrors = validateRegister(credentials);
+  
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors);
+        return;
       }
-    }
-  };
+  
+      try {
+        await register(credentials);
+        navigate("/login");
+      } catch (error) {
+        setErrors({ email: error.message });
+      }
+    };
 
   return (
     <div className="container">

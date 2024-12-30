@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; 
 import Quotes from "./Quotes";
-import Unit from "./Unit";
+import EditQuoteForm from "./EditQuoteForm";
+import { refreshAccessToken, getAccessToken, logout } from "../services/authService";
 
 function QuotesPanel() {
   const [quotes, setQuotes] = useState([]);
@@ -10,24 +11,24 @@ function QuotesPanel() {
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      const token = localStorage.getItem("token");
+      const token = getAccessToken();
       if (!token) {
-        navigate("/"); 
+        logout();
+        navigate("/");
         return;
       }
-
+    
       try {
         await axios.get("http://localhost:3000/auth/verify", {
           headers: { Authorization: `Bearer ${token}` },
         });
       } catch (error) {
-        console.error("Authentication failed:", error.response || error.message);
-        localStorage.removeItem("token");
-        localStorage.removeItem("refreshToken");
-        navigate("/"); 
+        console.error("Authentication failed:", error);
+        await refreshAccessToken();
+        navigate("/");
       }
     };
-
+    
     checkAuthentication();
 
     const fetchQuotes = async () => {
@@ -43,23 +44,6 @@ function QuotesPanel() {
 
     fetchQuotes();
   }, [navigate]);
-
-  const refreshAccessToken = async () => {
-    try {
-      const refreshToken = localStorage.getItem("refreshToken");
-      const response = await axios.post("http://localhost:3000/refresh-token", {
-        token: refreshToken,
-      });
-      localStorage.setItem("token", response.data.accessToken);
-      return response.data.accessToken;
-    } catch (error) {
-      console.error("Failed to refresh token:", error.response || error.message);
-      alert("Session expired. Please log in again.");
-      localStorage.removeItem("token");
-      localStorage.removeItem("refreshToken");
-      navigate("/"); 
-    }
-  };
 
   const addQuote = async (newQuote) => {
     try {
@@ -121,12 +105,12 @@ function QuotesPanel() {
     <div>
       <Quotes onAdd={addQuote} />
       <div className="quotes-container">
-        {quotes.map((unit) => (
-          <Unit
-            key={unit.id}
-            id={unit.id}
-            content={unit.content}
-            source={unit.source}
+        {quotes.map((quote) => (
+          <EditQuoteForm
+            key={quote.id}
+            id={quote.id}
+            content={quote.content}
+            source={quote.source}
             onDelete={deleteQuote}
             onEdit={editQuote}
           />

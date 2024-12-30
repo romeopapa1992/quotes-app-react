@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { validateLogin } from "../validation";
+import { validateLogin } from "../services/validation";
+import { login } from "../services/authService";
 
 function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -17,19 +17,14 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateLogin(credentials);
-
+  
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-
+  
     try {
-      const response = await axios.post("http://localhost:3000/auth/login", credentials);
-      const { accessToken, refreshToken } = response.data;
-
-      localStorage.setItem("token", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
-
+      await login(credentials);
       navigate("/quotes");
     } catch (error) {
       setErrors({ email: "Invalid email or password." });

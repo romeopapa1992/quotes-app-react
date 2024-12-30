@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Unit({ id, content, source, onDelete, onEdit }) {
+function EditQuoteForm({ id, content, source, onDelete, onEdit }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState(content);
   const [newSource, setNewSource] = useState(source);
@@ -44,4 +44,4 @@ function Unit({ id, content, source, onDelete, onEdit }) {
   );
 }
 
-export default Unit;
+export default EditQuoteForm;
