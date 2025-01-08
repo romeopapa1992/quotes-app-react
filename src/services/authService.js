@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:4000";
 
 export const getAccessToken = () => localStorage.getItem("token");
 export const getRefreshToken = () => localStorage.getItem("refreshToken");
