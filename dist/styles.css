@@ -1,0 +1,196 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-image: url('/assets/background-quotes.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  color: #333;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%; 
+  margin: auto; 
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+input, textarea {
+  width: 90%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+}
+
+button {
+  background-color: #007bff; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.button-group, 
+.quote-actions
+{
+  display: flex;
+  justify-content: space-evenly; 
+  align-items: center; 
+  gap: 10px; 
+}
+
+.quote-card textarea,
+.quote-card input {
+  width: 95%; 
+  margin: 5px auto; 
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; 
+}
+
+.quote-content {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.quote-source {
+  text-align: right;
+  font-weight: bold;
+  color: #555;
+}
+
+.quote-actions button {
+  flex: 1; 
+  margin: 5px; 
+  text-align: center;
+}
+
+.quote-card {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  width: 300px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  height: auto; 
+}
+
+.quote-card-editing {
+  height: auto; 
+  padding-bottom: 20px;
+  z-index: 10;
+  position: relative; 
+}
+
+.quote-edit-textarea,
+.quote-edit-input {
+  width: calc(100% - 20px); 
+  margin: 10px auto;
+  font-size: 1rem;
+}
+
+.quotes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  justify-content: center; 
+  align-items: flex-start; 
+  padding: 20px;
+  margin: 0 auto; 
+  max-width: 100%; 
+  box-sizing: border-box; 
+}
+
+footer {
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 10px 20px;
+  z-index: 1000;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px 20px;
+}
+
+.logout-button {
+  background-color: #080b0f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #373e45;
+  transform: scale(1.05);
+}
+
+.error {
+  border: 2px solid rgb(195, 77, 77);
+}
+
+.error-text {
+  color: rgb(195, 77, 77);
+  font-size: 0.9rem;
+}
+
+.input-group {
+  width: 100%;
+}
+
