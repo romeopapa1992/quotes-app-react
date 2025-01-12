@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://api.quotes.romeopapa1992.org";
+const API_URL = "https://api.quotes.romeopapa1992.org";
 
 export const getAccessToken = () => localStorage.getItem("token");
 export const getRefreshToken = () => localStorage.getItem("refreshToken");
