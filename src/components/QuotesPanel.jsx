@@ -5,6 +5,8 @@ import Quotes from "./Quotes";
 import EditQuoteForm from "./EditQuoteForm";
 import { refreshAccessToken, getAccessToken, logout } from "../services/authService";
 
+const API_URL = "https://apiquotes.romeopapa1992.org";
+
 function QuotesPanel() {
   const [quotes, setQuotes] = useState([]);
   const navigate = useNavigate(); 
@@ -19,7 +21,7 @@ function QuotesPanel() {
       }
     
       try {
-        await axios.get("http://localhost:4000/auth/verify", {
+        await axios.get(`${API_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } catch (error) {
@@ -33,7 +35,7 @@ function QuotesPanel() {
 
     const fetchQuotes = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/quotes", {
+        const response = await axios.get(`${API_URL}/quotes`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         setQuotes(response.data);
@@ -50,7 +52,7 @@ function QuotesPanel() {
       let token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
 
-      const response = await axios.post("http://localhost:4000/quotes", newQuote, {
+      const response = await axios.post(`${API_URL}/quotes`, newQuote, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setQuotes((prev) => [...prev, response.data]);
@@ -59,7 +61,7 @@ function QuotesPanel() {
         console.warn("Token expired, attempting to refresh...");
         const newToken = await refreshAccessToken();
         if (newToken) {
-          const response = await axios.post("http://localhost:4000/quotes", newQuote, {
+          const response = await axios.post(`${API_URL}/quotes`, newQuote, {
             headers: { Authorization: `Bearer ${newToken}` },
           });
           setQuotes((prev) => [...prev, response.data]);
@@ -73,7 +75,7 @@ function QuotesPanel() {
 
   const deleteQuote = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/quotes/${id}`, {
+      await axios.delete(`${API_URL}/quotes/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       setQuotes((prev) => prev.filter((quote) => quote.id !== id));
@@ -85,7 +87,7 @@ function QuotesPanel() {
   const editQuote = async (id, newContent, newSource) => {
     try {
       await axios.put(
-        `http://localhost:4000/quotes/${id}`,
+        `${API_URL}/quotes/${id}`,
         { content: newContent, source: newSource },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
